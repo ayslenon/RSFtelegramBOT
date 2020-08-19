@@ -36,16 +36,15 @@
 // defines
 
 //SSID e senha da rede WiFi utilizada
-#define SSID "EPSON_iPrint"
-#define PASSWORD "aocepson"
+#define SSID "your ssid"
+#define PASSWORD "your password"
 
 //Variável que define a cada quantos milisegundos será verificado se teve mensagem nova
 #define Intervalo_de_tempo 1000
 
 //Token do bot do telegram
-//#define BOT_TOKEN "738956687:AAEekaETTo8i-jjb1Tk11gjX2-mdsokCbzM"
-#define BOT_TOKEN "649471818:AAGRmvtHP6TEqS7gjnzyjvXvDbaUIBdPlRs"
-//#define BOT_TOKEN "848995162:AAEP0C4aLUjJfdQKuDtqgn0d-NzIC83mQqw"
+#define BOT_TOKEB "put your token here"
+
 //Variável para definir até quantos usuários podem interagir com o bot
 #define Total_de_usuarios_permitidos 10
 
