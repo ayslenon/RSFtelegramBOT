@@ -3,9 +3,10 @@
    27/09/2019
    Bot do Telegram para controle de irrigação
 */
+
 //==========================================================================================================================================================================
-//Setar um grupo de 2-4 funções que vão ativar o(s) atuadores
-//Ligar por x minutos todo dia as 07:00
+//Setar um grupo de funções que vão ativar os atuadores
+//Ligar por x minutos todo dia as 07:00, por exemplo
 
 //-------------------------------------------------------------------------------------------------------------------------------------
 // inclusões de bibliotecas
@@ -28,7 +29,6 @@
 
 //Biblioteca do bot Telegram utilizada
 #include <UniversalTelegramBot.h>
-//#include <EEPROM.h> 
 
 
 
@@ -39,11 +39,11 @@
 #define SSID "your ssid"
 #define PASSWORD "your password"
 
-//Variável que define a cada quantos milisegundos será verificado se teve mensagem nova
+//Variável que define a cada quantos milisegundos será verificado se há mensagens novas
 #define Intervalo_de_tempo 1000
 
 //Token do bot do telegram
-#define BOT_TOKEB "put your token here"
+#define BOT_TOKEN "put your bot token here"
 
 //Variável para definir até quantos usuários podem interagir com o bot
 #define Total_de_usuarios_permitidos 10
@@ -85,18 +85,17 @@ int a = 0;
 uint32_t ultimoregistrodetempo = 0, ultimoregistrodetempo2 = 0;
 
 //Ids dos usuários liberados para interagir com o bot (conferir a ID de comunicação via serial monitor).
-String usuariosPERMITIDOS[Total_de_usuarios_permitidos] = {"588349166", "782633992", "864145848", "869546674", "123456789",
+String usuariosPERMITIDOS[Total_de_usuarios_permitidos] = {"123456789", "123456789", "123456789", "123456789", "123456789",
                                                            "123456789", "123456789", "123456789", "123456789", "123456789"
                                                           };
-// A Primeira ID é a de Hilario no telegram
 
 //O vetor de nomes dos usuário deve estar devidamente alinhado nas posições com as respectivas IDS dos usuário no vetor de IDS, isso é, posição a posição
-String NOMEdosusuariosPERMITIDOS[Total_de_usuarios_permitidos] = {"Hilário", "Ayslenon", "Victor", "Gabriel", "123456789",
+String NOMEdosusuariosPERMITIDOS[Total_de_usuarios_permitidos] = {"123456789", "123456789", "123456789", "123456789", "123456789",
                                                                   "123456789", "123456789", "123456789", "123456789", "123456789"
                                                                  };
 
 //Variável para Descrever em texto qual o usuário permitido na operação.
-String NomedoUsuario, LastCHAT = "-347391142s"; //-347391142
+String NomedoUsuario, LastCHAT = "";
 //Variável de tempo do sistema
 uint32_t tempo;
 float tempoA1 = 0, tempoA2 = 0;
@@ -110,7 +109,7 @@ boolean status_atuador1 = LOW,
         status_atuador2 = LOW,
         tempoDefinido1  = false,
         tempoDefinido2  = false;
-//Modo_Auto    = false;
+
 
 hw_timer_t *timer = NULL;
 
@@ -160,7 +159,7 @@ void setup()
   /*
      num: é a ordem do temporizador. Podemos ter quatro temporizadores, então a ordem pode ser [0,1,2,3].
     divider: É um prescaler (reduz a frequencia por fator). Para fazer um agendador de um segundo,
-    usaremos o divider como 80 (clock principal do ESP32 é 80MHz). Cada instante será T = 1/(80) = 1us
+    usaremos o divider como 80 (clock principal do ESP32 é 80MHz). Cada instante será T = 1/(80MHz/80) = 1us
     countUp: True o contador será progressivo
   */
   timer = timerBegin(0, 80, true); //timerID 0, div 80
@@ -616,7 +615,7 @@ void atuadores (String IDdoCHAT, String text)
 }
 
 
-//comando para enviar alguma informação para outro ESP32
+
 //Conferir a estrutura que será utilizada para cada novo sensor a ser adicionado
 void MostrarStatus(String IDdoCHAT)
 {
